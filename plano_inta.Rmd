@@ -1,0 +1,42 @@
+---
+title: "Plano INTA EEA Mendoza"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+```
+
+```{r include=FALSE}
+library(mapview)
+library(sf)
+library(RColorBrewer)
+setwd("C://Users/Marcos/Desktop/GAP/")
+plano=read_sf("Ensayos.shp")
+names (plano)
+numclass <- 7
+colores <- brewer.pal(numclass, "YlOrRd")
+```
+
+
+```{r echo=FALSE}
+
+map<-mapview(plano, zcol = "Responsabl") +
+mapview(plano, zcol = "Superficie", at = seq(0, 7, 1), legend = TRUE, col.regions=brewer.pal(8, "YlGn")) +
+mapview(plano, zcol = "Variedad")+
+mapview(plano, zcol = "Prod_2018")+
+mapview(plano, zcol = "Prod_2019")+
+mapview(plano, zcol = "Prod_2020")+
+mapview(plano, zcol = "Prod_2021")
+
+leafem::addLogo(map, "https://inta.gob.ar/sites/all/themes/adaptivetheme/agil/logo.png",
+                position = "bottomleft",
+                offset.x = 5,
+                offset.y = 40,
+                width = 100,
+                height = 100)
+
+```
+
+
